@@ -1,0 +1,14 @@
+{
+  "name": "firebase-automatic-deployment-example",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ikkyu-3/firebase-automatic-deployment-example.git",
+  "author": "ikkyu-3 <toru.hasegawa.0521@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}
