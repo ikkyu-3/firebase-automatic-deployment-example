@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        firebase-automatic-deployment-example
+        Nuxt Project
       </h1>
       <h2 class="subtitle">
         My astounding Nuxt.js project
