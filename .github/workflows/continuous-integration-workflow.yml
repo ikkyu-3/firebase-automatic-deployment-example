@@ -63,6 +63,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: dist
+        path: ./
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
