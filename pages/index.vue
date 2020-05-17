@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        Nuxt Project
+        Nuxt
       </h1>
       <h2 class="subtitle">
         My astounding Nuxt.js project
