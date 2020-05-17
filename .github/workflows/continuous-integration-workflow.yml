@@ -46,7 +46,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: dist
-        path: dist/
+        path: dist
     - name: Build Succeeded
       if: ${{ success() }}
       run: echo "successed"
@@ -63,7 +63,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: dist
-        path: ./
+        path: dist
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
