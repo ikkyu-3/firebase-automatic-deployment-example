@@ -8,7 +8,8 @@ on:
     - closed
 
 jobs:
-  deploy:
+  test:
+    name: Test Job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -20,13 +21,55 @@ jobs:
       run: yarn install
     - name: Test Run
       run: yarn test
-    - name: build
-      run: echo "Build"
-    - name: deploy
-      run: echo "Deploy"
-    - name: The job has succeeded
+    - name: Test Succeeded
       if: ${{ success() }}
       run: echo "successed"
-    - name: The job has failed
+    - name: Test Failed
+      if: ${{ failure() }}
+      run: echo "failed"
+
+  build:
+    name: Build Job
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.12.0'
+    - name: Install dependencies
+      run: yarn install
+    - name: build
+      run: yarn generate
+    - name: Upload Dist
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: dist/
+    - name: Build Succeeded
+      if: ${{ success() }}
+      run: echo "successed"
+    - name: Build Failed
+      if: ${{ failure() }}
+      run: echo "failed"
+
+  deploy:
+    name: Deploy Job
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
+      with:
+        name: dist
+    - name: Firebase CLI install
+      run: curl -sL firebase.tools | bash
+    - name: deploy
+      run: firebase deploy --token ${{ secretes.FIREBASE_TOKEN }}
+    - name: Deploy Succeeded
+      if: ${{ success() }}
+      run: echo "successed"
+    - name: Deploy Failed
       if: ${{ failure() }}
       run: echo "failed"
